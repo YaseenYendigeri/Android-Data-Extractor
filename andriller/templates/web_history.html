@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+<h3>{{title}}</h3>
+
+<p>Total: {{DATA|length}}</p>
+
+<table class="table table-striped">
+    {% include '_headers.html' %}
+    {% for item in DATA %}
+    <tr>
+        <td nowrap="nowrap">{{item.id|default(loop.index, true)}}</td>
+        <td title="{{item.title|e}}">
+            {{item.title|default('', true)|truncate(60, True)|e}}
+        </td>
+        <td>
+            <a href="{{item.url}}" target="_blank">
+                {{item.url|default('', true)|truncate(60, True)}}
+            </a>
+        </td>
+        <td nowrap="nowrap">{{item.date|default('', true)}}</td>
+        <td nowrap="nowrap">{{item.visits|default('', true)}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}
